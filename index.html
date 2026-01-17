@@ -1,224 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday My Darling Wifey 🎂🎁❤️</title>
-    <style>
-        :root {
-            --pink: #FFB6BE; --orange: #FAC898; --romantic-red: #ff477e;
-            --white-glass: rgba(255, 255, 255, 0.85); --text-main: #4a3629;
-        }
-        body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
-            font-family: 'Palatino', 'Georgia', serif;
-            background: linear-gradient(135deg, var(--pink), var(--orange));
-            color: var(--text-main); overflow-x: hidden; scroll-behavior: smooth;
-        }
-       .scene {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
-            display: none; flex-direction: column; align-items: center; justify-content: center;
-            animation: sceneFade 0.8s ease-in-out forwards;
-        }
-       .active { display: flex; }
-        @keyframes sceneFade { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
-        
-        /* Step 1: Cake */
-       .cake { position: relative; width: 200px; height: 100px; background: #fff; border-radius: 10px 10px 0 0; margin-top: 50px; }
-       .cake::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 20px; background: #ff85a2; border-radius: 10px 10px 0 0; }
-       .candle { position: absolute; width: 8px; height: 35px; background: #ffd1dc; border-radius: 4px; top: -35px; }
-       .c1 { left: 40px; }.c2 { left: 95px; }.c3 { left: 150px; }
-       .flame {
-            position: absolute; width: 12px; height: 22px; background: radial-gradient(#fff, #ffa500, #ff4500);
-            border-radius: 50% 50% 20% 20%; top: -20px; left: -2px;
-            animation: flicker 0.1s infinite alternate; box-shadow: 0 0 10px #ffa500;
-        }
-        @keyframes flicker { 0% { transform: scale(1) rotate(-2deg); } 100% { transform: scale(1.1) rotate(2deg); } }
-       .smoke { position: absolute; width: 10px; height: 10px; background: rgba(100,100,100,0.4); border-radius: 50%; opacity: 0; }
-        
-        /* Step 2: Balloon */
-       .balloon {
-            width: 100px; height: 130px; background: var(--romantic-red);
-            border-radius: 80% 80% 80% 80%; position: relative;
-            cursor: pointer; animation: float 3s infinite ease-in-out;
-            box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2);
-        }
-       .string { width: 2px; height: 100px; background: rgba(255,255,255,0.4); position: absolute; bottom: -110px; left: 49px; }
-        @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-20px) rotate(3deg); } }
-        
-        /* Step 4: Final */
-       .final-scroll { display: none; align-items: center; flex-direction: column; padding: 40px 0; width: 100%; }
-       .message-card {
-            background: var(--white-glass); padding: 40px; border-radius: 30px;
-            max-width: 550px; text-align: center; margin: 0 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            line-height: 1.8;
-        }
-       .photo-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-            gap: 20px; width: 90%; max-width: 1000px; margin-top: 50px;
-        }
-       .photo-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 20px; opacity: 0; transform: translateY(20px); transition: 1s; }
-       .reveal img { opacity: 1; transform: translateY(0); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Darling Wifey 🎂🎁❤️</title>
 
-        button {
-            padding: 15px 35px; border: none; background: var(--romantic-red); color: white;
-            border-radius: 50px; font-size: 1.1rem; cursor: pointer; animation: pulse 2s infinite;
-        }
-        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-        canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 99; }
-       .firework-text { z-index: 100; text-align: center; position: relative; }
-    </style>
+<style>
+:root{
+  --pink:#ffb6c1;
+  --orange:#ffd1a1;
+  --red:#ff477e;
+  --glass:rgba(255,255,255,0.88);
+  --text:#4a2c2a;
+}
+
+*{box-sizing:border-box}
+
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  min-height:100%;
+  font-family:"Georgia","Palatino",serif;
+  background:linear-gradient(135deg,var(--pink),var(--orange));
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+.scene{
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  animation:fade .8s ease;
+}
+
+.scene.active{display:flex}
+
+@keyframes fade{
+  from{opacity:0;transform:scale(.97)}
+  to{opacity:1;transform:scale(1)}
+}
+
+/* ---------- CAKE ---------- */
+.cake{
+  position:relative;
+  width:220px;
+  height:120px;
+  background:#fff;
+  border-radius:15px 15px 10px 10px;
+  margin-top:30px;
+}
+.cake:before{
+  content:"";
+  position:absolute;
+  top:0;
+  width:100%;
+  height:25px;
+  background:#ff85a2;
+  border-radius:15px 15px 0 0;
+}
+
+.candle{
+  position:absolute;
+  width:10px;
+  height:40px;
+  background:#ffd1dc;
+  top:-40px;
+  border-radius:5px;
+}
+.c1{left:45px}
+.c2{left:105px}
+.c3{left:165px}
+
+.flame{
+  position:absolute;
+  top:-22px;
+  left:-3px;
+  width:16px;
+  height:26px;
+  background:radial-gradient(#fff,#ffa500,#ff4500);
+  border-radius:50% 50% 30% 30%;
+  animation:flicker .15s infinite alternate;
+}
+@keyframes flicker{
+  from{transform:scale(1) rotate(-3deg)}
+  to{transform:scale(1.1) rotate(3deg)}
+}
+
+.smoke{
+  position:absolute;
+  width:12px;
+  height:12px;
+  background:rgba(150,150,150,.4);
+  border-radius:50%;
+  animation:smoke 1.5s forwards;
+}
+@keyframes smoke{
+  from{opacity:.8;transform:translateY(0)}
+  to{opacity:0;transform:translateY(-40px)}
+}
+
+/* ---------- BALLOON ---------- */
+.balloon{
+  width:140px;
+  height:180px;
+  background:radial-gradient(circle at 30% 30%,#ff8fb1,#ff477e);
+  border-radius:50% 50% 50% 50%;
+  cursor:pointer;
+  position:relative;
+  animation:float 3s infinite ease-in-out;
+}
+.balloon:after{
+  content:"";
+  position:absolute;
+  bottom:-18px;
+  left:50%;
+  width:4px;
+  height:90px;
+  background:rgba(255,255,255,.5);
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-20px)}
+}
+
+/* ---------- FINAL ---------- */
+.final{
+  display:none;
+  padding:40px 20px;
+  flex-direction:column;
+  align-items:center;
+}
+
+.card{
+  background:var(--glass);
+  padding:35px;
+  border-radius:30px;
+  max-width:600px;
+  line-height:1.8;
+  box-shadow:0 15px 40px rgba(0,0,0,.15);
+}
+
+.photos{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:20px;
+  width:90%;
+  max-width:900px;
+  margin-top:40px;
+}
+.photos img{
+  width:100%;
+  border-radius:20px;
+  opacity:0;
+  transform:translateY(20px);
+  transition:1s;
+}
+.photos.reveal img{
+  opacity:1;
+  transform:translateY(0);
+}
+
+button{
+  margin-top:20px;
+  padding:15px 35px;
+  font-size:1.1rem;
+  border:none;
+  border-radius:50px;
+  background:var(--red);
+  color:#fff;
+  cursor:pointer;
+  transition:.3s;
+}
+button:hover{transform:scale(1.05)}
+
+canvas{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:50;
+}
+</style>
 </head>
+
 <body>
-    <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
-    <canvas id="mainCanvas"></canvas>
 
-    <div id="step1" class="scene active">
-        <h1>🎂 Blow the candles 🎂</h1>
-        <div class="cake">
-            <div class="candle c1"><div class="flame"></div></div>
-            <div class="candle c2"><div class="flame"></div></div>
-            <div class="candle c3"><div class="flame"></div></div>
-        </div>
-        <p>(Tap anywhere to blow the candles)</p>
-    </div>
+<audio id="music" src="music.mp3" loop preload="auto"></audio>
+<canvas id="fx"></canvas>
 
-    <div id="step2" class="scene">
-        <h1>🎈 Click the balloon 🎈</h1>
-        <div id="balloon" class="balloon"><div class="string"></div></div>
-    </div>
+<!-- STEP 1 -->
+<div id="s1" class="scene active">
+  <h1>🎂 Blow the candles 🎂</h1>
+  <div class="cake">
+    <div class="candle c1"><div class="flame"></div></div>
+    <div class="candle c2"><div class="flame"></div></div>
+    <div class="candle c3"><div class="flame"></div></div>
+  </div>
+  <p>(Tap anywhere to blow the candles)</p>
+</div>
 
-    <div id="step3" class="scene">
-        <div class="firework-text">
-            <h1 style="font-size: 2.5rem;">🎆 Happy Birthday Sweetheart 🎆</h1>
-            <button id="surpriseBtn">There’s a surprise for you 💖</button>
-        </div>
-    </div>
+<!-- STEP 2 -->
+<div id="s2" class="scene">
+  <h1>🎈 Click the balloon 🎈</h1>
+  <div id="balloon" class="balloon"></div>
+</div>
 
-    <div id="step4" class="final-scroll">
-        <div class="message-card">
-            <h2 style="color: var(--romantic-red);">💖 Happy Birthday My Darling Wifey 💖</h2>
-            <p>Today is not just your birthday, it’s the day the most beautiful soul came into this world 🌎.</p>
-            <p>You are my calm in chaos, my smile on hard days, my peace when everything feels heavy 💗.</p>
-            <p>Every time you laugh, my heart forgets how to beat properly. Loving you feels natural — like breathing 🌸.</p>
-            <p>I promise to stand by you, love you endlessly, and choose you every single day ⌚.</p>
-            <p>You are my everything, my inspiration, my happiness. May this day be as bright, colorful, and amazing as your soul ❤️.</p>
-            <h3>Happy Birthday My Forever Love ❤️</h3>
-        </div>
-        <div class="photo-grid" id="photoGrid">
-            <img src="photo1.jpg"> <img src="photo2.jpg"> <img src="photo3.jpg"> <img src="photo4.jpg"> <img src="photo5.jpg">
-        </div>
-    </div>
+<!-- STEP 3 -->
+<div id="s3" class="scene">
+  <h1>🎆 Happy Birthday Sriza 🎆</h1>
+  <button id="goFinal">There’s a surprise for you 💖</button>
+</div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('mainCanvas');
-            const ctx = canvas.getContext('2d');
-            const audio = document.getElementById('bgMusic');
-            const surpriseBtn = document.getElementById('surpriseBtn');
-            const balloon = document.getElementById('balloon');
-            
-            let step = 1;
-            let hearts =; // FIXED: Initialized with brackets to prevent SyntaxError
-            let fireworks =; // FIXED: Initialized with brackets to prevent SyntaxError
-            let canvasActive = false;
+<!-- STEP 4 -->
+<div id="s4" class="final">
+  <div class="card">
+    <h2 style="color:#ff477e">💖 Happy Birthday My Darling Wifey 💖</h2>
+    <p>
+      Today is not just your birthday, it’s the day the most beautiful soul came into this world 🌎.<br>
+      You are my calm in chaos, my smile on hard days, my peace when everything feels heavy 💗.<br><br>
 
-            const resize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
-            window.addEventListener('resize', resize);
-            resize();
+      Every time you laugh, my heart forgets how to beat properly. Loving you feels natural — like breathing 🌸.<br>
+      I promise to stand by you, love you endlessly, and choose you every single day ⌚.<br><br>
 
-            // FIXED: Decoupled listeners to prevent ReferenceError
-            document.body.addEventListener('click', function handleBlow() {
-                if (step === 1) {
-                    audio.play().catch(() => {});
-                    document.querySelectorAll('.flame').forEach(f => f.style.display = 'none');
-                    setTimeout(() => {
-                        document.getElementById('step1').classList.remove('active');
-                        document.getElementById('step2').classList.add('active');
-                        step = 2;
-                    }, 800);
-                    document.body.removeEventListener('click', handleBlow);
-                }
-            });
+      You are my everything, my inspiration, my happiness.  
+      May this day be as bright, colorful, and amazing as your soul ❤️.
+    </p>
+    <h3>Happy Birthday my forever love ❤️</h3>
+  </div>
 
-            balloon.addEventListener('click', (e) => {
-                e.stopPropagation();
-                balloon.style.display = 'none';
-                canvasActive = true;
-                for(let i=0; i<40; i++) hearts.push(new Heart(e.clientX, e.clientY, true));
-                for(let i=0; i<30; i++) hearts.push(new Heart(Math.random()*canvas.width, -20, false));
-                render();
-                setTimeout(() => {
-                    document.getElementById('step2').classList.remove('active');
-                    document.getElementById('step3').classList.add('active');
-                    step = 3;
-                }, 1000);
-            });
+  <div class="photos" id="photos">
+    <img src="photo1.jpg">
+    <img src="photo2.jpg">
+    <img src="photo3.jpg">
+    <img src="photo4.jpg">
+    <img src="photo5.jpg">
+  </div>
+</div>
 
-            surpriseBtn.addEventListener('click', () => {
-                document.getElementById('step3').classList.remove('active');
-                document.getElementById('step4').style.display = 'flex';
-                document.body.style.overflowY = 'auto';
-                setTimeout(() => document.getElementById('photoGrid').classList.add('reveal'), 100);
-                step = 4;
-            });
+<script>
+const music=document.getElementById("music");
+const canvas=document.getElementById("fx");
+const ctx=canvas.getContext("2d");
+canvas.width=innerWidth; canvas.height=innerHeight;
 
-            class Heart {
-                constructor(x, y, pop) {
-                    this.x = x; this.y = y; this.size = Math.random()*12+10;
-                    this.vx = pop? (Math.random()-0.5)*12 : (Math.random()-0.5)*3;
-                    this.vy = pop? (Math.random()-0.5)*12 : Math.random()*3+2;
-                    this.a = 1; this.pop = pop;
-                }
-                draw() {
-                    ctx.save(); ctx.globalAlpha = this.a; ctx.fillStyle = '#ff477e';
-                    ctx.beginPath(); let r = this.size/22;
-                    for(let t=0; t<=Math.PI*2; t+=0.1) {
-                        ctx.lineTo(this.x + 16*Math.pow(Math.sin(t),3)*r, this.y - (13*Math.cos(t)-5*Math.cos(2*t)-2*Math.cos(3*t)-Math.cos(4*t))*r);
-                    }
-                    ctx.fill(); ctx.restore();
-                }
-                update() {
-                    this.x += this.vx; this.y += this.vy;
-                    if(this.pop) { this.a -= 0.015; this.vy += 0.15; }
-                    else if(this.y > canvas.height) this.y = -20;
-                }
-            }
+let hearts=[],confetti=[],fireworks=[],step=1;
 
-            class Firework {
-                constructor() {
-                    this.x = Math.random()*canvas.width; this.y = canvas.height;
-                    this.ty = Math.random()*canvas.height/2; this.shards =; this.done = false;
-                }
-                update() {
-                    if(this.y > this.ty) this.y -= 6;
-                    else if(!this.done) {
-                        for(let i=0; i<60; i++) {
-                            let a = Math.random()*Math.PI*2; let s = Math.random()*6+2;
-                            this.shards.push({x:this.x, y:this.y, vx:Math.cos(a)*s, vy:Math.sin(a)*s, a:1, h:Math.random()*360});
-                        }
-                        this.done = true;
-                    }
-                    this.shards.forEach((s, i) => { s.x += s.vx; s.y += s.vy; s.vy += 0.12; s.a -= 0.015; if(s.a<=0) this.shards.splice(i,1); });
-                }
-                draw() {
-                    if(!this.done) { ctx.fillStyle='#fff'; ctx.beginPath(); ctx.arc(this.x,this.y,3,0,7); ctx.fill(); }
-                    this.shards.forEach(s => { ctx.globalAlpha=s.a; ctx.fillStyle=`hsl(${s.h},100%,60%)`; ctx.beginPath(); ctx.arc(s.x,s.y,2,0,7); ctx.fill(); });
-                }
-            }
+document.body.addEventListener("click",()=>{
+  if(step!==1) return;
+  music.play().catch(()=>{});
+  document.querySelectorAll(".flame").forEach(f=>{
+    f.style.display="none";
+    let s=document.createElement("div");
+    s.className="smoke";
+    f.parentElement.appendChild(s);
+  });
+  setTimeout(()=>{s1.classList.remove("active");s2.classList.add("active");step=2},900);
+},{once:true});
 
-            function render() {
-                if(!canvasActive) return;
-                ctx.fillStyle = step === 3? 'rgba(0,0,0,0.1)' : 'rgba(255,182,190,0.3)';
-                ctx.fillRect(0,0,canvas.width,canvas.height);
-                hearts.forEach((h, i) => { h.update(); h.draw(); if(h.pop && h.a<=0) hearts.splice(i,1); });
-                if(step === 3) { 
-                    if(Math.random()<0.06) fireworks.push(new Firework()); 
-                    fireworks.forEach((f, i) => { f.update(); f.draw(); if(f.done && f.shards.length===0) fireworks.splice(i,1); }); 
-                }
-                requestAnimationFrame(render);
-            }
-        });
-    </script>
+balloon.onclick=e=>{
+  balloon.style.display="none";
+  for(let i=0;i<40;i++) hearts.push({x:e.clientX,y:e.clientY,a:1});
+  for(let i=0;i<60;i++) confetti.push({x:Math.random()*canvas.width,y:-20});
+  animate();
+  setTimeout(()=>{s2.classList.remove("active");s3.classList.add("active");step=3},800);
+};
+
+goFinal.onclick=()=>{
+  s3.classList.remove("active");
+  s4.style.display="flex";
+  setTimeout(()=>photos.classList.add("reveal"),200);
+};
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  hearts.forEach((h,i)=>{
+    h.y-=2; h.a-=.02;
+    ctx.globalAlpha=h.a;
+    ctx.fillStyle="#ff477e";
+    ctx.beginPath();
+    ctx.arc(h.x,h.y,8,0,7);
+    ctx.fill();
+    if(h.a<=0) hearts.splice(i,1);
+  });
+  confetti.forEach((c,i)=>{
+    c.y+=4;
+    ctx.fillStyle=`hsl(${Math.random()*360},100%,70%)`;
+    ctx.fillRect(c.x,c.y,6,6);
+    if(c.y>canvas.height) confetti.splice(i,1);
+  });
+  if(hearts.length||confetti.length) requestAnimationFrame(animate);
+}
+</script>
+
 </body>
 </html>
